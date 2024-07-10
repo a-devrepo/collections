@@ -2,6 +2,7 @@ package listas.operacoesbasicas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ListaTarefas {
 
@@ -12,7 +13,15 @@ public class ListaTarefas {
     }
 
     public void adicionarTarefa(String descricao) {
-        this.tarefaList.add(new Tarefa(descricao));
+        this.adicionarTarefa(descricao, 0);
+    }
+
+    public void adicionarTarefa(String descricao, Integer posicao) {
+        if (descricao.isBlank())
+            throw new IllegalArgumentException("Descrição não pode ser nula");
+        if (posicao == null || posicao < 0)
+            throw new IllegalArgumentException("Posição inválida");
+        this.tarefaList.add(posicao, new Tarefa(descricao));
     }
 
     public void removerTarefa(String descricao) {
